@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: db-netpol
+spec:
+  ingress: 
+    -
+      from: 
+        -
+          namespaceSelector:
+            matchLabels:
+              name: santander-xwiki
+        -
+          podSelector:
+            matchLabels:
+              app: db-label
+      ports:
+        -
+          port: 3306
+          protocol: TCP
+  podSelector: 
+    matchLabels:
+      app: db-label
+  policyTypes:
+    - Ingress
