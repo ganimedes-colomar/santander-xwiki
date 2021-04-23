@@ -14,6 +14,13 @@ spec:
     spec:
       containers:
         -
+          env:
+            -
+              name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  key: DB_DATABASE
+                  name: db-secret
           image: mysql:5.7
           name: db-container
           ports:
