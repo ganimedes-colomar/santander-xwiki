@@ -20,9 +20,17 @@ spec:
             - containerPort: 3306
           volumeMounts:
             -
+              mountPath: /docker-entrypoint-initdb.d
+              name: db-init-volume
+            -
               mountPath: /var/lib/mysql
               name: db-volume
       volumes:
+        -
+          configMap:
+            defaultMode: 0400
+            name: db-init-cm
+          name: db-init-volume
         -
           name: db-volume
           persistentVolumeClaim:
