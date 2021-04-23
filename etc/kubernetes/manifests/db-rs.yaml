@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: db-rs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db-label
+  template:
+    metadata:
+      labels:
+        app: db-label
+    spec:
+      containers:
+        -
+          image: mysql:5.7
+          name: db-container
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            -
+              mountPath: /var/lib/mysql
+              name: db-volume
+      volumes:
+        -
+          name: db-volume
+          persistentVolumeClaim:
+            claimName: db-pvc
+            readOnly: false
