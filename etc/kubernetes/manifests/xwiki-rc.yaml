@@ -1,0 +1,94 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: xwiki-rc
+spec:
+  replicas: 1
+  selector:
+    app: xwiki-label
+  template:
+    metadata:
+      labels:
+        app: xwiki-label
+    spec:
+      containers:
+        -
+          args:
+            - $(MYSQL_ARG_1)
+            - $(MYSQL_ARG_2)
+            - $(MYSQL_ARG_3)
+            - $(MYSQL_ARG_4)
+          env:
+            -
+              name: MYSQL_ARG_1
+              valueFrom:
+                configMapKeyRef:
+                  key: DB_ARG_1
+                  name: db-args-cm
+            -
+              name: MYSQL_ARG_2
+              valueFrom:
+                configMapKeyRef:
+                  key: DB_ARG_2
+                  name: db-args-cm
+            -
+              name: MYSQL_ARG_3
+              valueFrom:
+                configMapKeyRef:
+                  key: DB_ARG_3
+                  name: db-args-cm
+            -
+              name: MYSQL_ARG_4
+              valueFrom:
+                configMapKeyRef:
+                  key: DB_ARG_4
+                  name: db-args-cm
+            -
+              name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  key: DB_DATABASE
+                  name: db-secret
+            -
+              name: MYSQL_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: DB_HOST
+                  name: db-secret
+            -
+              name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: DB_PASSWORD
+                  name: db-secret
+            -
+              name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: DB_ROOT_PASSWORD
+                  name: db-secret
+            -
+              name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  key: DB_USER
+                  name: db-secret
+          image: ganimedescolomar/santander-xwiki:latest
+          name: xwiki-container
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            -
+              mountPath: /usr/local/xwiki
+              name: xwiki-volume
+      volumes:
+        -
+          configMap:
+            defaultMode: 0400
+            name: db-init-cm
+          name: db-init-volume
+        -
+          name: xwiki-volume
+          persistentVolumeClaim:
+            claimName: xwiki-pvc
+            readOnly: false
