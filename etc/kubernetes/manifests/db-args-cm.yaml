@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  DB_ARG_1: --character-set-server=utf8mb4
+  DB_ARG_2: --collation-server=utf8mb4_bin
+  DB_ARG_3: --explicit-defaults-for-timestamp=1
+  DB_ARG_4: --datadir=/var/lib/mysql/data
+kind: ConfigMap
+metadata:
+  name: db-args-cm
