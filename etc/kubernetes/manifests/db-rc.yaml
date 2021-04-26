@@ -32,6 +32,12 @@ spec:
                 secretKeyRef:
                   key: DB_USER
                   name: db-secret
+            -
+              name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: DB_ROOT_PASSWORD
+                  name: db-secret
           image: mysql:5.7
           name: db-container
           ports:
