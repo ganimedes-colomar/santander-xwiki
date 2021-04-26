@@ -7,10 +7,6 @@ spec:
     -
       from: 
         -
-          namespaceSelector:
-            matchLabels:
-              name: santander-xwiki
-        -
           podSelector:
             matchLabels:
               app: db-label
