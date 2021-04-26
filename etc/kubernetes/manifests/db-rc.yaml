@@ -20,6 +20,18 @@ spec:
                 secretKeyRef:
                   key: DB_DATABASE
                   name: db-secret
+            -
+              name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: DB_PASSWORD
+                  name: db-secret
+            -
+              name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  key: DB_USER
+                  name: db-secret
           image: mysql:5.7
           name: db-container
           ports:
