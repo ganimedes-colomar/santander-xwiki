@@ -76,17 +76,14 @@ spec:
           image: ganimedescolomar/santander-xwiki:latest
           name: xwiki-container
           ports:
-            - containerPort: 3306
+            - 
+              containerPort: 8080
+              protocol: TCP
           volumeMounts:
             -
               mountPath: /usr/local/xwiki
               name: xwiki-volume
       volumes:
-        -
-          configMap:
-            defaultMode: 0400
-            name: db-init-cm
-          name: db-init-volume
         -
           name: xwiki-volume
           persistentVolumeClaim:
