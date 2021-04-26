@@ -1,12 +1,11 @@
 apiVersion: apps/v1
-kind: ReplicaSet
+kind: ReplicationController
 metadata:
-  name: db-rs
+  name: db-rc
 spec:
   replicas: 1
   selector:
-    matchLabels:
-      app: db-label
+    app: db-label
   template:
     metadata:
       labels:
