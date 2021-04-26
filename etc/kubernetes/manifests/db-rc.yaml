@@ -14,31 +14,31 @@ spec:
       containers:
         -
           args:
-            - $(MYSQL_ARG_1)
-            - $(MYSQL_ARG_2)
-            - $(MYSQL_ARG_3)
-            - $(MYSQL_ARG_4)
+            - $(DB_ARG_1)
+            - $(DB_ARG_2)
+            - $(DB_ARG_3)
+            - $(DB_ARG_4)
           env:
             -
-              name: MYSQL_ARG_1
+              name: DB_ARG_1
               valueFrom:
                 configMapKeyRef:
                   key: DB_ARG_1
                   name: db-args-cm
             -
-              name: MYSQL_ARG_2
+              name: DB_ARG_2
               valueFrom:
                 configMapKeyRef:
                   key: DB_ARG_2
                   name: db-args-cm
             -
-              name: MYSQL_ARG_3
+              name: DB_ARG_3
               valueFrom:
                 configMapKeyRef:
                   key: DB_ARG_3
                   name: db-args-cm
             -
-              name: MYSQL_ARG_4
+              name: DB_ARG_4
               valueFrom:
                 configMapKeyRef:
                   key: DB_ARG_4
