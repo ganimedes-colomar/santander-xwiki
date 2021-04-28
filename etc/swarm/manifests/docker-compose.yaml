@@ -1,0 +1,14 @@
+networks:
+  db:
+    internal: true
+  xwiki:
+    internal: true
+services:
+  db:
+    deploy:
+      placement:
+        constraints:
+          - node.role == worker
+      replicas: 1
+
+  xwiki:
